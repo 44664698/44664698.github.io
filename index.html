@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>星际猎人 · 《星汉》《斗志昂扬》军团</title>
     <style>
-        /* ===== 全局重置 & 字体 ===== */
+        /* 全局重置 & 字体 */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +22,7 @@
             padding: 1.5rem;
         }
 
-        /* ===== 卡片容器 ===== */
+        /* 卡片容器 — 带光感玻璃态 */
         .card {
             max-width: 720px;
             width: 100%;
@@ -31,7 +31,9 @@
             -webkit-backdrop-filter: blur(12px);
             border-radius: 3rem;
             padding: 3.5rem 3rem;
-            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            box-shadow:
+                0 30px 60px -20px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.03);
             text-align: center;
             transition: transform 0.25s ease, box-shadow 0.3s ease;
@@ -42,7 +44,7 @@
             box-shadow: 0 40px 70px -20px rgba(0, 0, 0, 0.9);
         }
 
-        /* ===== 装饰光点 ===== */
+        /* 装饰小光点 (纯粹氛围) */
         .glow-dot {
             display: inline-block;
             width: 10px;
@@ -53,7 +55,7 @@
             margin-bottom: 1.5rem;
         }
 
-        /* ===== 主标题 ===== */
+        /* 主文案 */
         .title {
             font-size: 2.4rem;
             font-weight: 600;
@@ -63,17 +65,19 @@
             margin-bottom: 0.5rem;
         }
 
+        /* 渐变文字 + 去掉下划线（针对链接） */
         .title .highlight {
             background: linear-gradient(135deg, #fcd34d, #f59e0b);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             font-weight: 700;
-            text-decoration: none;
+            text-decoration: none;          /* 去掉下划线 */
         }
 
+        /* 可选的悬停效果（视觉反馈） */
         .title .highlight:hover {
-            filter: brightness(1.1);
+            filter: brightness(1.1);        /* 微微提亮，表示可点击 */
         }
 
         .sub {
@@ -85,112 +89,60 @@
             padding-bottom: 1.5rem;
         }
 
-        /* ===== 入口卡片（统一） ===== */
-        .entry-wrapper {
+        /* 网址区域 — 干净、可复制 */
+        .url-wrapper {
             background: rgba(0, 0, 0, 0.35);
             border-radius: 2rem;
-            padding: 1.5rem 1.8rem;
+            padding: 1.25rem 1.8rem;
             border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: background 0.2s, border-color 0.25s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            width: 100%;
+            transition: background 0.2s;
+            word-break: break-all;
         }
 
-        .entry-wrapper:hover {
+        .url-wrapper:hover {
             background: rgba(0, 0, 0, 0.5);
         }
 
-        .entry-label {
+        .url-label {
             display: block;
-            width: 100%;
-            text-align: center;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.06em;
+            color: rgba(255, 255, 255, 0.25);
+            margin-bottom: 0.5rem;
             font-weight: 500;
-            margin-bottom: 0.6rem;
         }
 
-        /* ===== QQ群入口专用 ===== */
-        .qq-wrapper {
-            border-color: rgba(18, 183, 245, 0.15);
-        }
-
-        .qq-wrapper:hover {
-            border-color: rgba(18, 183, 245, 0.35);
-            background: rgba(18, 183, 245, 0.06);
-        }
-
-        .qq-wrapper .entry-label {
-            color: rgba(18, 183, 245, 0.6);
-        }
-
-        /* ===== 链接样式 ===== */
-        .qq-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            width: 100%;
+        .url-link {
+            display: inline-block;
             font-size: 1.2rem;
             font-weight: 500;
-            color: #6ec8f5;
+            color: #93bbfc;
             text-decoration: none;
             border-bottom: 2px solid transparent;
-            transition: color 0.2s, border-color 0.2s, transform 0.2s;
-            margin: 0 auto;
-            line-height: 1;
+            transition: color 0.2s, border-color 0.2s;
+            padding: 0.1rem 0;
+            line-height: 1.5;
         }
 
-        .qq-link:hover {
-            color: #8fd8ff;
-            border-bottom-color: rgba(18, 183, 245, 0.5);
-            transform: scale(1.02);
+        .url-link:hover {
+            color: #b8d4ff;
+            border-bottom-color: #93bbfc88;
         }
 
-        .qq-link:active {
-            color: #4ab0e0;
+        .url-link:active {
+            color: #7aa9f0;
         }
 
-        /* 自定义图标样式（替代加载失败的外部图） */
-        .qq-icon {
-            font-size: 1.8rem;
-            line-height: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.25s ease;
-        }
-
-        .qq-link:hover .qq-icon {
-            transform: rotate(-4deg) scale(1.05);
-        }
-
-        .qq-group-name {
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            background: linear-gradient(135deg, #6ec8f5, #3ba9e0);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            white-space: nowrap;
-        }
-
-        /* ===== 底部 ===== */
+        /* 小尾巴 — 极简版权/提示 */
         .footer-note {
             margin-top: 2.2rem;
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.15);
             letter-spacing: 0.3px;
-            text-align: center;
         }
 
-        /* ===== 响应式 ===== */
+        /* 响应式 */
         @media (max-width: 500px) {
             .card {
                 padding: 2.5rem 1.5rem;
@@ -199,30 +151,11 @@
             .title {
                 font-size: 1.8rem;
             }
-            .qq-link {
+            .url-link {
                 font-size: 1rem;
             }
-            .entry-wrapper {
-                padding: 1.2rem 1.2rem;
-            }
-            .qq-icon {
-                font-size: 1.5rem;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .card {
-                padding: 2rem 1rem;
-            }
-            .title {
-                font-size: 1.5rem;
-            }
-            .qq-link {
-                gap: 0.4rem;
-                flex-wrap: wrap;
-            }
-            .qq-icon {
-                font-size: 1.3rem;
+            .url-wrapper {
+                padding: 1rem 1.2rem;
             }
         }
     </style>
@@ -230,28 +163,33 @@
 <body>
 
     <div class="card">
+        <!-- 氛围小光点 -->
         <span class="glow-dot"></span>
 
+        <!-- 主标题 -->
         <h1 class="title">
             星际猎人<br />
-            <a href="https://www.zhixi.com/view/ae25547d" target="_blank" rel="noopener noreferrer" class="highlight">
+            <!-- 这里改为链接，点击可跳转 -->
+            <a href="https://www.zhixi.com/view/ae25547d"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="highlight">
                 《星汉》<br />
                 《斗志昂扬》军团
             </a>
         </h1>
         <p class="sub">— 官网直达 —</p>
 
-                <!-- 网址卡片（原有链接保留） -->
+        <!-- 网址卡片（原有链接保留） -->
         <div class="url-wrapper">
             <span class="url-label">▼ 点击访问</span>
-            <a href="https://www.zhixi.com/view/b25aa962"
+            <a href="https://www.zhixi.com/view/ae25547d"
                target="_blank"
                rel="noopener noreferrer"
                class="url-link">
-                https://www.zhixi.com/view/b25aa962
+                https://www.zhixi.com/view/ae25547d
             </a>
         </div>
-        
 
         <div class="footer-note">
             · 星际猎人 · 《斗志昂扬》军团 ·
